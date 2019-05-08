@@ -50,12 +50,16 @@ The data structue is as follows:
 	
 ### A few notes:
 Gmail.com works perfectly as "enforced".
+
 Outlook.com and Office365.com works as "testing" without a TLSRPT.
+
 Yahoo.com works as "testing" with a TLSRPT.
-NBC.com seems to use a wildcard in their DNS server to allow *.nbc.com TXT to respond with "inbound".  It may create failures in the MAIL::STS module.
+
+NBC.com seems to use a wildcard in their DNS server to allow *.nbc.com TXT to respond with "inbound".  It may create failures in the MAIL::STS module. Can someone fix Comcast/NBC?
 
 My distros LWP defaults to the system root certificates.  This may need to be adjusted for your system.   
 
+Exim has a an experimental LMDB lookup.  This may reduce the need of the getmx script.
 
 
 ### Exim Configs:
