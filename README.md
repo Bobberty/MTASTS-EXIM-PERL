@@ -94,7 +94,7 @@ remote_smtp_mtasts_enforce:
 # Do a full cert check on the MTA-STS mx host names
   tls_verify_cert_hostnames = {${perl{getmx}{$domain}}}
   tls_tempfail_tryclear = false
-# Do no connect to any servers that are not listed in the MTA-STS mx.
+# Do not connect to any servers that are not listed in the MTA-STS mx.
   event_action = ${if eq {tcp:connect}{$event_name}{${perl{getmta}{$domain}{$host}}} {}}
 .ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
   message_size_limit = ${if > {$max_received_linelength}{998} {1}{0}}
