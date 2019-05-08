@@ -46,7 +46,7 @@ dnslookup_mtasts_enforce:
 # This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is enforce continue with this router.
   condition = ${if eq{{${perl{getmta}{$domain}}}{enforce}}}
   domains = ! +local_domains
-# This pushes the mail to the remote_smtp_mtasts_enforce transport
+# Push the mail to the remote_smtp_mtasts_enforce transport
   transport = remote_smtp_mtasts_enforce
   same_domain_copy_routing = yes
   # ignore private rfc1918 and APIPA addresses
