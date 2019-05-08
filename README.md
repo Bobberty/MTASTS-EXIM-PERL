@@ -29,12 +29,13 @@ getmx:
   
   
 Exim Configs:
-
+```
   perl_startup = do '(Path of script)/mta-lmdb.pl'
   perl_at_start = true
-  
+```  
 Example Exim4 Routers:
 
+```
 dnslookup_mtasts_enforce:
   debug_print = "R: dnslookup-mtasts-enforce for $local_part@$domain"
   driver = dnslookup
@@ -48,7 +49,8 @@ dnslookup_mtasts_enforce:
 			255.255.255.255
   dnssec_request_domains = *
   no_more
-
+```
+```
 dnslookup_mtasts_testing:
   debug_print = "R: dnslookup-mtasts-testing for $local_part@$domain"
   driver = dnslookup
@@ -62,7 +64,8 @@ dnslookup_mtasts_testing:
 			255.255.255.255
   dnssec_request_domains = *
   no_more
-
+```
+```
 redirect_mtasts_fail:
   debug_print = "R: redirect-mtasts-failure for $local_part@$domain $address_data"
   driver = redirect
@@ -71,10 +74,10 @@ redirect_mtasts_fail:
   allow_defer
   data = :defer: MTA-STS Failure $address_data
   no_more
-
+```
 
 Example Transports (Modified from Debian):
-
+```
 remote_smtp_mtasts_enforce:
   debug_print = "T: remote_smtp_mtasts_enforce for $local_part@$domain"
   driver = smtp
@@ -127,7 +130,8 @@ tls_privatekey = REMOTE_SMTP_PRIVATEKEY
 dnssec_request_domains = *
 hosts_try_dane = *
 .endif
-  
+```
+```
 remote_smtp_mtasts_testing:
   debug_print = "T: remote_smtp_mtasts_testing for $local_part@$domain"
   driver = smtp
@@ -176,5 +180,6 @@ tls_privatekey = REMOTE_SMTP_PRIVATEKEY
 .ifndef REMOTE_SMTP_DISABLE_DANE
 dnssec_request_domains = *
 hosts_try_dane = *
-.endif 
+.endif
+```
   
