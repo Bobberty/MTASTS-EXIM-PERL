@@ -18,7 +18,7 @@ There are two different subroutines:
 
 ### getmta:
 #### getmta (DomainName) (HostName)
-  If the HostName is not provided, this script will check the MTA-STS dns record and HTTP record. And will put the MTA-STS record into an LMDB database. The return will be "endorce", "testing", "none", "dane" or "fail".  A "fail" means that there is a problem with the MTA-STS information.
+  If the HostName is not provided, this script will check the MTA-STS dns record and HTTP record. And will put the MTA-STS record into an LMDB database. The return will be "enforce", "testing", "none", "dane" or "fail".  A "fail" means that there is a problem with the MTA-STS information.
   
   If the Domain name is not in the database, the MTA-STS dns and http will be polled and checked.  The data will be placed into the LMDB database.
   
