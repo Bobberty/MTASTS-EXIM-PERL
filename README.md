@@ -17,7 +17,7 @@ On demand, this script will poll a poll a domain for MTA-STS info and put the in
 There are two different subroutines:
 
 ### getmta:
-  getmta (DomainName) (HostName)
+#### getmta (DomainName) (HostName)
   If the HostName is not provided, this script will check the MTA-STS dns record and HTTP record. And will put the MTA-STS record into an LMDB database. The return will be "endorce", "testing", "none", "dane" or "fail".  A "fail" means that there is a problem with the MTA-STS information.
   If the Domain name is not in the database, the MTA-STS dns and http will be polled and checked.  The data will be placed into the LMDB database.
   If the Domain name is in the database, the expiration of the info will be checked.  If the info has expired, it will attempt to get a new record and put the data into the database.
@@ -25,7 +25,7 @@ There are two different subroutines:
   When the HostName is present, the script will check the LMDB database to determine if the hostname is within the MTA-STS mx records.  If it is not the return is a zero ("0"). Else nothing is returned.
   
 ### getmx:
-  getmx (domainname)
+#### getmx (domainname)
   Returns the MX list from the MTA-STS record as a colon seperated list.
   
 The LMDB will contain the TLSRPT contact info.
