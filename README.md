@@ -1,5 +1,5 @@
 # MTASTS-EXIM4-PERL
-Perl script designed to be used by Exim4 for MTA-STS compliance.
+Perl script designed to be used by Exim4 for RFC 8461 MTA-STS compliance.
 
 Dependancies:
   File::Path
@@ -26,6 +26,9 @@ getmta:
 getmx:
   getmx (domainname)
   Returns the MX list from the MTA-STS record as a colon seperated list.
+  
+The LMDB will contain the TLSRPT contact info.
+Per RFC 8461, testing allows for an mta-sts failure.  So, this will only be logged at EXIM.  In the future, this can be used with the TLSRPT feature to provide a response to the server admin.
   
   
 Exim Configs:
