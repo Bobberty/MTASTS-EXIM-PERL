@@ -1,5 +1,5 @@
-# MTASTS-EXIM4-PERL
-## Perl script designed to be used by Exim4 for RFC 8461 MTA-STS compliance.
+# MTASTS-EXIM-PERL
+## Perl script designed to be used by Exim for RFC 8461 MTA-STS compliance.
 
 ### Dependancies:
 ```
@@ -12,7 +12,7 @@ cpan: Mail::STS
 
 
 This script is designed to work with the Exim4 Perl interpreter.
-On demand, this script will poll a poll a domain for MTA-STS info and put the info into an LMDB database.  Then, respond to EXIM with required info for processing the outgoing email.
+On demand, this script will poll a domain for MTA-STS info and put the info into an LMDB database.  Then, respond to EXIM with required info for processing the outgoing email.
 
 There are two different subroutines:
 
