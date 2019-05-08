@@ -43,8 +43,10 @@ Example Exim4 Routers:
 dnslookup_mtasts_enforce:
   debug_print = "R: dnslookup-mtasts-enforce for $local_part@$domain"
   driver = dnslookup
+# This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is enforce continue with this router.
   condition = ${if eq{{${perl{getmta}{$domain}}}{enforce}}}
   domains = ! +local_domains
+# This pushes the mail to the remote_smtp_mtasts_enforce transport
   transport = remote_smtp_mtasts_enforce
   same_domain_copy_routing = yes
   # ignore private rfc1918 and APIPA addresses
@@ -58,8 +60,10 @@ dnslookup_mtasts_enforce:
 dnslookup_mtasts_testing:
   debug_print = "R: dnslookup-mtasts-testing for $local_part@$domain"
   driver = dnslookup
+# This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is testing continue with this router.
   condition = ${if eq{{${perl{getmta}{$domain}}}{testing}}}
   domains = ! +local_domains
+# Push the email to the remote_smtp_mtasts_testing transport
   transport = remote_smtp_mtasts_testing
   same_domain_copy_routing = yes
   # ignore private rfc1918 and APIPA addresses
@@ -73,8 +77,10 @@ dnslookup_mtasts_testing:
 redirect_mtasts_fail:
   debug_print = "R: redirect-mtasts-failure for $local_part@$domain $address_data"
   driver = redirect
+# This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is fail continue with this router.
   condition = ${if eq{{${perl{getmta}{$domain}}}{fail}}}
   domains = ! +local_domains
+# Per RFC 8461 defer for another attempt later.  Hopefully the receiving agency will fix their MTA-STS.
   allow_defer
   data = :defer: MTA-STS Failure $address_data
   no_more
@@ -85,8 +91,10 @@ Example Transports (Modified from Debian):
 remote_smtp_mtasts_enforce:
   debug_print = "T: remote_smtp_mtasts_enforce for $local_part@$domain"
   driver = smtp
+# Do a full cert check on the MTA-STS mx host names
   tls_verify_cert_hostnames = {${perl{getmx}{$domain}}}
   tls_tempfail_tryclear = false
+# Do no connect to any servers that are not listed in the MTA-STS mx.
   event_action = ${if eq {tcp:connect}{$event_name}{${perl{getmta}{$domain}{$host}}} {}}
 .ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
   message_size_limit = ${if > {$max_received_linelength}{998} {1}{0}}
@@ -137,6 +145,8 @@ hosts_try_dane = *
 ```
 ```
 remote_smtp_mtasts_testing:
+# This is just a duplicate of normal sending.  Per RFC 8461, Don't defer or delay if an MTA-STS deivery has failed if the policy is testing.
+# So, don't do anything.  This would be the place for a reporting mechanism.
   debug_print = "T: remote_smtp_mtasts_testing for $local_part@$domain"
   driver = smtp
 .ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
