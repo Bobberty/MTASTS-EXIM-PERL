@@ -45,7 +45,7 @@ The data structue is as follows:
 - domainname.com:id
   - This is the MTA-STS id located in the MTA-STS DNS TXT record.
 - domainname.com:report
-  - This is the contact URL for the RFC 8460 TLSRPT.  When it comes to the MTA-STS RFC 8461, this is only required if the mode/policy is set to "testing" and the sending server sends regular reports.
+  - This is the contact URL for the RFC 8460 TLSRPT.  When it comes to the MTA-STS RFC 8461, this is only required if the mode/policy is set to "testing" and the sending server sends regular reports. At this time, the mailto: gets stripped and this only contains an email address.
 	
 ### A few notes:
 Gmail.com works perfectly as "enforced".
