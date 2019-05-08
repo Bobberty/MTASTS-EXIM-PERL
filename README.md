@@ -32,12 +32,12 @@ The LMDB will contain the TLSRPT contact info.
 Per RFC 8461, testing allows for an mta-sts failure.  So, this will only be logged at EXIM.  In the future, this can be used with the TLSRPT feature to provide a response to the server admin.
   
   
-Exim Configs:
+### Exim Configs:
 ```
   perl_startup = do '(Path of script)/mta-lmdb.pl'
   perl_at_start = true
 ```  
-Example Exim Routers:
+#### Example Exim Routers:
 
 ```
 dnslookup_mtasts_enforce:
@@ -86,7 +86,7 @@ redirect_mtasts_fail:
   no_more
 ```
 
-Example Transports (Modified from Debian):
+#### Example Transports (Modified from Debian):
 ```
 remote_smtp_mtasts_enforce:
   debug_print = "T: remote_smtp_mtasts_enforce for $local_part@$domain"
