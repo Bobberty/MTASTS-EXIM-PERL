@@ -11,7 +11,7 @@ cpan: Mail::STS
 ```    
 
 
-This script is designed to work with the Exim4 Perl interpreter.
+This script is designed to work with the Exim Perl interpreter.
 On demand, this script will poll a domain for MTA-STS info and put the info into an LMDB database.  Then, respond to EXIM with required info for processing the outgoing email.
 
 There are two different subroutines:
@@ -37,7 +37,7 @@ Exim Configs:
   perl_startup = do '(Path of script)/mta-lmdb.pl'
   perl_at_start = true
 ```  
-Example Exim4 Routers:
+Example Exim Routers:
 
 ```
 dnslookup_mtasts_enforce:
