@@ -31,7 +31,32 @@ There are two different subroutines:
 The LMDB will contain the TLSRPT contact info.
 Per RFC 8461, testing allows for an mta-sts failure.  So, this will only be logged at EXIM.  In the future, this can be used with the TLSRPT feature to provide a response to the server admin.
   
-  
+### LMDB Info
+This database was chosen due to the speed and concurrency.  It is a Key-Value store system.
+There are no named databases within the LMDB structure.
+The data structue is as follows:
+
+domainname.com:mx
+	Contains a colon seperated list of domain names listed in the MTA-STS HTML record.  This may contain wildcards.
+domainname.com:mode
+	Contains the mode the MTA-STS record is in.  This may be one of the following "enforce","testing" or "none"
+domainname.com:expire
+	This contains the Unix Time that this record expires in seconds.
+domainname.com:id
+	This is the MTA-STS id located in the MTA-STS DNS TXT record.
+domainname.com:report
+	This is the contact URL for the RFC 8460 TLSRPT.  When it comes to the MTA-STS RFC 8461, this is only required if the mode/policy is set to "testing" and the sending server sends regular reports.
+	
+### A few notes:
+Gmail.com works perfectly as "enforced".
+Outlook.com and Office365.com works as "testing" without a TLSRPT.
+Yahoo.com works as "testing" with a TLSRPT.
+NBC.com seems to use a wildcard in their DNS server to allow *.nbc.com TXT to respond with "inbound".  It may create failures in the MAIL::STS module.
+
+My distros LWP defaults to the system root certificates.  This may need to be adjusted for your system.   
+
+
+
 ### Exim Configs:
 ```
   perl_startup = do '(Path of script)/mta-lmdb.pl'
