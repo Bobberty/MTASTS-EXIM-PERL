@@ -1,7 +1,7 @@
 # MTASTS-EXIM-PERL
 ## Perl script designed to be used by Exim for RFC 8461 MTA-STS compliance.
 
-### Dependancies:
+### Perl Dependancies:
 ```
 File::Path
 DateTime
