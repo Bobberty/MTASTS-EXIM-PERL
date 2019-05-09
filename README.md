@@ -49,6 +49,8 @@ The data structue is as follows:
   - This is the contact URL for the RFC 8460 TLSRPT.  When it comes to the MTA-STS RFC 8461, this is only required if the mode/policy is set to "testing" and the sending server sends regular reports. At this time, the mailto: gets stripped and this only contains an email address.
 	
 ### A few notes:
+Ensure the path variable is set to someplace your Exim can read/write.  In my case it's /var/spool/exim4.
+
 Gmail.com works perfectly as "enforced".
 
 Outlook.com and Office365.com works as "testing" without a TLSRPT.
