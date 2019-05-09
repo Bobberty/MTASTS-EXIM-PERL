@@ -14,6 +14,8 @@ cpan: Mail::STS
 This script is designed to work with the Exim Perl interpreter.
 On demand, this script will check if MTA-STS data is in a LMDB database.  If it is not then it will poll a domain for MTA-STS info and put the info into the database.  Then, respond to EXIM with required info for processing the outgoing email.
 
+This script provides reboot resistant caching of MTA-STS data.  And if the database is not found, it will reconstruct the database and restart the caching.
+
 There are two different subroutines:
 
 ### getmta:
@@ -35,6 +37,9 @@ Per RFC 8461, testing allows for an mta-sts failure.  So, this will only be logg
 ### LMDB Info
 This database was chosen due to the speed and concurrency.  It is a Key-Value store system.
 There are no named databases within the LMDB structure.
+
+Any software that can access LMDB databse shouldn't have a problem accessing the data provided the application has rights.
+
 The data structue is as follows:
 
 - domainname.tld:mx
