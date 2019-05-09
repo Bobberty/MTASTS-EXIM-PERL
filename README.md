@@ -12,7 +12,7 @@ cpan: Mail::STS
 
 
 This script is designed to work with the Exim Perl interpreter.
-On demand, this script will poll a domain for MTA-STS info and put the info into an LMDB database.  Then, respond to EXIM with required info for processing the outgoing email.
+On demand, this script will check if MTA-STS data is in a LMDB database.  If it is not then it will poll a domain for MTA-STS info and put the info into the database.  Then, respond to EXIM with required info for processing the outgoing email.
 
 There are two different subroutines:
 
