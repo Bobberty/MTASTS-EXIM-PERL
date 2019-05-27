@@ -81,7 +81,7 @@ dnslookup_mtasts_enforce:
   debug_print = "R: dnslookup-mtasts-enforce for $local_part@$domain"
   driver = dnslookup
 # This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is enforce continue with this router.
-  condition = ${if eq{{${perl{getmta}{$domain}}}{enforce}}}
+  condition = ${if eq{${perl{getmta}{$domain}}}{enforce}}
   domains = ! +local_domains
 # Push the mail to the remote_smtp_mtasts_enforce transport
   transport = remote_smtp_mtasts_enforce
@@ -98,7 +98,7 @@ dnslookup_mtasts_testing:
   debug_print = "R: dnslookup-mtasts-testing for $local_part@$domain"
   driver = dnslookup
 # This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is testing continue with this router.
-  condition = ${if eq{{${perl{getmta}{$domain}}}{testing}}}
+  condition = ${if eq{${perl{getmta}{$domain}}}{testing}}
   domains = ! +local_domains
 # Push the email to the remote_smtp_mtasts_testing transport
   transport = remote_smtp_mtasts_testing
@@ -115,7 +115,7 @@ redirect_mtasts_fail:
   debug_print = "R: redirect-mtasts-failure for $local_part@$domain $address_data"
   driver = redirect
 # This condition uses the getmta subroutine and returns the MTA-STS policy.  If the policy is fail continue with this router.
-  condition = ${if eq{{${perl{getmta}{$domain}}}{fail}}}
+  condition = ${if eq{${perl{getmta}{$domain}}}{fail}}
   domains = ! +local_domains
 # Per RFC 8461 defer for another attempt later.  Hopefully the receiving agency will fix their MTA-STS.
   allow_defer
